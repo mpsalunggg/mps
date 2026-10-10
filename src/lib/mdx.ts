@@ -15,7 +15,8 @@ export interface WritingFrontmatter {
   slug: string
   title: string
   description: string
-  image: string
+  /** Optional override; writings fall back to the generated card in public/og. */
+  image?: string
   date: string
   category: string
   readingTime: string

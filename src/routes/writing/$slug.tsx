@@ -16,7 +16,7 @@ export const Route = createFileRoute('/writing/$slug')({
     const { meta, links } = seo({
       title: `${loaderData.frontmatter.title} - Writing`,
       description: loaderData.frontmatter.description,
-      image: loaderData.frontmatter.image,
+      image: loaderData.frontmatter.image ?? `/og/${params.slug}.png`,
       keywords: loaderData.frontmatter.category,
       type: 'article',
       path: `/writing/${params.slug}`,
