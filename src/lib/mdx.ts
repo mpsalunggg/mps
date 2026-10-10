@@ -132,3 +132,14 @@ export function getAllWritingSlugs(): string[] {
     })
     .filter(Boolean)
 }
+
+const NEW_WINDOW_DAYS = 30
+
+/** Only the latest writing (list index 0) counts as new, and only within the window. */
+export function isNewWriting(writing: WritingFrontmatter, index: number) {
+  return (
+    index === 0 &&
+    Date.now() - new Date(writing.date).getTime() <=
+      NEW_WINDOW_DAYS * 24 * 60 * 60 * 1000
+  )
+}

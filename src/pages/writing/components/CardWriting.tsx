@@ -5,9 +5,10 @@ import { WritingFrontmatter } from "@/lib/mdx";
 interface CardWritingProps {
   writing: WritingFrontmatter;
   isLast?: boolean;
+  isNew?: boolean;
 }
 
-const CardWriting = ({ writing, isLast }: CardWritingProps) => {
+const CardWriting = ({ writing, isLast, isNew }: CardWritingProps) => {
   const date = new Date(writing.date);
   const formatted = date.toLocaleDateString("en-US", {
     month: "long",
@@ -26,6 +27,11 @@ const CardWriting = ({ writing, isLast }: CardWritingProps) => {
       >
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           <div className="flex items-center gap-2 font-mono text-[10px] uppercase text-muted-foreground">
+            {isNew && (
+              <span className="rounded-full bg-primary px-1.5 py-0.5 font-medium text-primary-foreground">
+                New
+              </span>
+            )}
             <span>{writing.category}</span>
             <span>·</span>
             <span>{writing.readingTime}</span>

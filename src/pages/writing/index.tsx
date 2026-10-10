@@ -1,6 +1,6 @@
 import { AnimatedLines } from '@/components/common/Background'
 import CardWriting from './components/CardWriting'
-import { WritingFrontmatter } from '@/lib/mdx'
+import { WritingFrontmatter, isNewWriting } from '@/lib/mdx'
 
 interface WritingPageProps {
   writings: WritingFrontmatter[]
@@ -32,6 +32,7 @@ const WritingPage = ({ writings }: WritingPageProps) => {
                     key={writing.slug}
                     writing={writing}
                     isLast={index === writings.length - 1}
+                    isNew={isNewWriting(writing, index)}
                   />
                 ))}
               </div>

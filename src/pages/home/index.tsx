@@ -6,6 +6,7 @@ import CardWriting from "@/pages/writing/components/CardWriting";
 import { ExperienceTimeline } from "@/pages/work/components/ExperienceTimeline";
 import { iconMap, skills } from "@/constants/about";
 import { workExperiences } from "@/constants/work";
+import { isNewWriting } from "@/lib/mdx";
 import type { ProjectFrontmatter, WritingFrontmatter } from "@/lib/mdx";
 import type { Contributions, GithubStats } from "@/pages/home/server";
 import ContributionGraph from "@/components/common/ContributionGraph";
@@ -196,6 +197,7 @@ const Home = ({
                   key={writing.slug}
                   writing={writing}
                   isLast={index === latestWritings.length - 1}
+                  isNew={isNewWriting(writing, index)}
                 />
               ))}
             </div>
