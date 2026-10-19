@@ -28,7 +28,7 @@ const ContactSection = ({ githubStats }: ContactSectionProps) => {
   ];
 
   return (
-    <section id="contact" className="flex flex-col gap-6">
+    <section id="contact" className="relative flex flex-col gap-6">
       <SectionHeader
         eyebrow="Get in touch"
         title={
@@ -36,6 +36,8 @@ const ContactSection = ({ githubStats }: ContactSectionProps) => {
             Let&apos;s <span className="font-normal italic">Connect</span>
           </>
         }
+        note="say hi, I don't bite"
+        noteSide="right"
         description="Always open to discussing new projects, creative ideas, or opportunities to be part of your vision."
         className="mb-0"
       />

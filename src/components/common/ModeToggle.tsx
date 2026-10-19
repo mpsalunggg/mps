@@ -23,11 +23,20 @@ export function ModeToggle() {
     // Derived synchronously from `theme`, so a click is reflected immediately.
     const isDark = theme === 'dark' || (theme === 'system' && systemDark)
 
+    const toggle = () => {
+        // Flags a fresh switch to dark so the home section notes draw in.
+        // Never set on load, so a reload in dark mode stays clean.
+        const root = document.documentElement
+        if (isDark) delete root.dataset.annotate
+        else root.dataset.annotate = ''
+        setTheme(isDark ? 'light' : 'dark')
+    }
+
     return (
         <Button
             variant="ghost"
             size="icon-sm"
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+            onClick={toggle}
             aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
         >
             {isDark ? <Sun /> : <Moon />}

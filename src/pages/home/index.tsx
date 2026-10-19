@@ -87,10 +87,11 @@ const Home = ({
       </section>
 
       <div className="page-container space-y-24 pb-24">
-        <section>
+        <section className="relative">
           <SectionHeader
             eyebrow="Who I am"
             title="About"
+            note="the human behind the code"
             to="/about"
             linkLabel="Read more"
           />
@@ -146,10 +147,12 @@ const Home = ({
           </div>
         </section>
 
-        <section>
+        <section className="relative">
           <SectionHeader
             eyebrow="Things I've built"
             title="Selected Work"
+            note="my favorite builds live here"
+            noteSide="right"
             to="/projects"
             linkLabel="All projects"
           />
@@ -171,10 +174,11 @@ const Home = ({
           )}
         </section>
 
-        <section>
+        <section className="relative">
           <SectionHeader
             eyebrow="Where I've worked"
             title="Experience"
+            note="where I learned things the hard way"
             to="/work"
             linkLabel="Full history"
           />
@@ -182,10 +186,12 @@ const Home = ({
           <ExperienceTimeline items={workExperiences} limit={2} />
         </section>
 
-        <section>
+        <section className="relative">
           <SectionHeader
             eyebrow="What I'm thinking about"
             title="Writing"
+            note="notes I wish I had earlier"
+            noteSide="right"
             to="/writing"
             linkLabel="All articles"
           />
@@ -208,8 +214,12 @@ const Home = ({
           )}
         </section>
 
-        <section>
-          <SectionHeader eyebrow="How I show up" title="Activity" />
+        <section className="relative">
+          <SectionHeader
+            eyebrow="How I show up"
+            title="Activity"
+            note="proof I actually ship"
+          />
           <ContributionGraph contributions={contributions} />
         </section>
 

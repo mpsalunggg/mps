@@ -236,6 +236,49 @@ html.dark pre.shiki {
   animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Home section notes: hidden until ModeToggle flags a fresh switch to
+   dark. Flipping display restarts the animations, so every switch redraws. */
+.section-note {
+  display: none;
+}
+
+:root.dark[data-annotate] .section-note {
+  display: flex;
+}
+
+.section-note path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: note-draw 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
+}
+
+.section-note path + path {
+  animation-delay: 0.75s;
+  animation-duration: 0.2s;
+}
+
+.section-note > span {
+  opacity: 0;
+  animation: note-fade 0.5s ease-out 0.9s forwards;
+}
+
+@keyframes note-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes note-fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in-up {
     animation: none;
@@ -245,5 +288,12 @@ html.dark pre.shiki {
 
   .gb-marker-pulse {
     animation: none;
+  }
+
+  .section-note path,
+  .section-note > span {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
   }
 }
