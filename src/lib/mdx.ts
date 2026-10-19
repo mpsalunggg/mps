@@ -67,11 +67,9 @@ export const getAllProjectFrontmatter = async (): Promise<
     })
   )
 
-  return allProjects
-    .filter(
-      (frontmatter): frontmatter is ProjectFrontmatter => frontmatter !== null
-    )
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return allProjects.filter(
+    (frontmatter): frontmatter is ProjectFrontmatter => frontmatter !== null
+  )
 }
 
 export function getAllProjectSlugs(): string[] {

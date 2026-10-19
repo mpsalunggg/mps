@@ -26,6 +26,10 @@ export const getAllProjects = createServerFn({ method: 'GET' }).handler(
           views: viewsMap.get(project.slug)?.views || 0,
         }),
       )
+      // Newest first by DB createdAt; projects without a row sort last.
+      projectsWithViews.sort(
+        (a, b) => (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0),
+      )
       return { projects: projectsWithViews }
     } catch (error) {
       console.error('Error loading projects with views:', error)
