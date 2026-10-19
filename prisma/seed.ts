@@ -17,6 +17,7 @@ const projectSlugs = [
   { title: 'Kopi Garuda', views: 0 },
   { title: 'Netflix Clone', views: 0 },
   { title: 'Ask Me', views: 0 },
+  { title: 'Sapa', views: 0 },
 ]
 
 const writingSlugs = [

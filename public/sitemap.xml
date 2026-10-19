@@ -131,4 +131,15 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://putrasatria.site/projects/sapa</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://putrasatria.site/projects/project_8.webp</image:loc>
+      <image:title>Sapa</image:title>
+    </image:image>
+  </url>
+
 </urlset>

@@ -1,0 +1,47 @@
+export const frontmatter = {
+  slug: 'sapa',
+  title: 'Sapa',
+  description:
+    'A cross-framework component registry that ships one custom-built toast system to both React and Vue, installable with a single shadcn CLI command.',
+  image: '/projects/project_8.webp',
+  tech: [
+    'React',
+    'Vue',
+    'TypeScript',
+    'Next.js',
+    'Tailwind CSS',
+    'shadcn Registry',
+  ],
+  github: 'https://github.com/mpsalunggg/sapa',
+  demo: 'https://sapa-registry.vercel.app/',
+  category: 'Frontend',
+}
+
+# Project Overview
+
+**Sapa** is my own component registry for toast notifications. Instead of pulling in a package like `sonner`, you copy the source straight into your project and own it. The same design is authored twice, once as `.tsx` for React and once as `.vue` for Vue, so both frameworks get an identical API.
+
+## Install
+
+```bash
+# React
+npx shadcn@latest add https://sapa-registry.vercel.app/r/react/toaster.json
+
+# Vue
+npx shadcn-vue@latest add https://sapa-registry.vercel.app/r/vue/toaster.json
+```
+
+Mount `<Toaster />` once, then call `toast.success("Saved")` from anywhere.
+
+## Key Features
+
+- **Cross-framework**: one registry, two hand-written sources with the same `toast()` API
+- **Built from scratch**: no `sonner` or `vue-sonner` underneath
+- **One squared shape**: no variants or sizes to choose, only a semantic `type` (success, error, warning, info) that colors the icon tile and the bottom progress bar
+- **Rich API**: `toast.promise`, `toast.progress`, `toast.loading`, actions, custom content and six positions
+- **Directional motion**: toasts exit toward their anchor and can be swiped away
+- **Accessible**: `aria-live` announcements, keyboard-focusable dismiss and `prefers-reduced-motion` support
+
+## Technical Implementation
+
+`registry.json` is the single source of truth. A build script inlines each component's files into JSON under `/r/*.json`, which the shadcn CLI reads to install them. A Next.js site serves those files and shows a live preview with copyable code, while a separate Vite + Vue sandbox checks that the Vue items render correctly.
