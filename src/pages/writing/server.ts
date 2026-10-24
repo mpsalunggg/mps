@@ -38,7 +38,7 @@ export const getAllWritings = createServerFn({ method: 'GET' }).handler(
 )
 
 export const getDetailWriting = createServerFn({ method: 'GET' })
-  .inputValidator((data: { slug: string }) => data)
+  .validator((data: { slug: string }) => data)
   .handler(async ({ data }) => {
     const writing = await getAllWritingFrontmatter().then((writings) =>
       writings.find((w) => w.slug === data.slug),
@@ -48,46 +48,17 @@ export const getDetailWriting = createServerFn({ method: 'GET' })
       throw notFound()
     }
 
-    const existingView = await prisma.writingView.findUnique({
+    const view = await prisma.writingView.findUnique({
       where: { slug: data.slug },
-      select: { createdAt: true },
+      select: { views: true, createdAt: true },
     })
 
-    try {
-      if (import.meta.env.VITE_UPDATE_VIEWS === 'true') {
-        const updatedView = await prisma.writingView.upsert({
-          where: { slug: data.slug },
-          update: {
-            views: {
-              increment: 1,
-            },
-          },
-          create: {
-            slug: data.slug,
-            views: 1,
-          },
-        })
-
-        return {
-          slug: data.slug,
-          frontmatter: {
-            ...writing,
-            views: updatedView.views,
-            date: existingView?.createdAt?.toISOString() || writing.date,
-          },
-        }
-      } else {
-        return {
-          slug: data.slug,
-          frontmatter: {
-            ...writing,
-            views: writing.views || 0,
-            date: existingView?.createdAt?.toISOString() || writing.date,
-          },
-        }
-      }
-    } catch (error) {
-      console.error('Error incrementing writing view:', error)
-      throw new Error('Failed to increment writing view')
+    return {
+      slug: data.slug,
+      frontmatter: {
+        ...writing,
+        views: view?.views ?? 0,
+        date: view?.createdAt?.toISOString() || writing.date,
+      },
     }
   })

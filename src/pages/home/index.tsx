@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { AnimatedLines } from "@/components/common/Background";
 import SectionHeader from "./components/SectionHeader";
 import ContactSection from "./components/ContactSection";
@@ -42,7 +43,7 @@ const Home = ({
             style={{ animationDelay: "0.1s", animationFillMode: "both" }}
           >
             <p className="text-muted-foreground text-sm">
-              Hi, I&apos;m Putra — based in South Tangerang.
+              Hi, I&apos;m Putra.
             </p>
           </div>
 
@@ -60,8 +61,29 @@ const Home = ({
             style={{ animationDelay: "0.4s", animationFillMode: "both" }}
           >
             <p className="text-muted-foreground text-base leading-relaxed font-light text-pretty md:text-lg">
-              Passionate about exploring new technologies and sharing knowledge
-              through creative solutions.
+              I like digging into new tech and sharing what I learn along the
+              way. Off the keyboard I&apos;m usually on a basketball court. If
+              you&apos;re a good shooter,{" "}
+              <Link
+                to="/court"
+                className="group text-foreground/80 hover:text-foreground inline-flex items-baseline gap-1.5 font-medium transition-colors"
+              >
+                let&apos;s see your threes
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4 self-center transition-transform duration-500 group-hover:rotate-90"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="9.5" />
+                  <path d="M2.5 12h19M12 2.5v19" />
+                  <path d="M5.3 5.3c3.2 3 3.2 10.4 0 13.4M18.7 5.3c-3.2 3-3.2 10.4 0 13.4" />
+                </svg>
+              </Link>
+              .
             </p>
           </div>
 

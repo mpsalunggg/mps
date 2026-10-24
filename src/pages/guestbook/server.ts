@@ -58,7 +58,7 @@ export const getGuestbookMessages = createServerFn({ method: 'GET' }).handler(
 )
 
 export const addGuestbookMessage = createServerFn({ method: 'POST' })
-  .inputValidator(
+  .validator(
     (data: {
       name: string
       message: string

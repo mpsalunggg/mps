@@ -39,56 +39,27 @@ export const getAllProjects = createServerFn({ method: 'GET' }).handler(
 )
 
 export const getDetailProject = createServerFn({ method: 'GET' })
-  .inputValidator((data: { slug: string }) => data)
+  .validator((data: { slug: string }) => data)
   .handler(async ({ data }) => {
     const project = await getAllProjectFrontmatter().then((projects) =>
       projects.find((p) => p.slug === data.slug),
     )
 
-    const createdAtDate = await prisma.projectView.findUnique({
-      where: { slug: data.slug },
-      select: { createdAt: true },
-    })
-
     if (!project) {
       throw notFound()
     }
 
-    try {
-      if (import.meta.env.VITE_UPDATE_VIEWS === 'true') {
-        const updatedView = await prisma.projectView.upsert({
-          where: { slug: data.slug },
-          update: {
-            views: {
-              increment: 1,
-            },
-          },
-          create: {
-            slug: data.slug,
-            views: 1,
-          },
-        })
+    const view = await prisma.projectView.findUnique({
+      where: { slug: data.slug },
+      select: { views: true, createdAt: true },
+    })
 
-        return {
-          slug: data.slug,
-          frontmatter: {
-            ...project,
-            views: updatedView.views,
-            date: createdAtDate?.createdAt?.toISOString() || '',
-          },
-        }
-      } else {
-        return {
-          slug: data.slug,
-          frontmatter: {
-            ...project,
-            views: project.views || 0,
-            date: createdAtDate?.createdAt?.toISOString() || '',
-          },
-        }
-      }
-    } catch (error) {
-      console.error('Error incrementing project view:', error)
-      throw new Error('Failed to increment project view')
+    return {
+      slug: data.slug,
+      frontmatter: {
+        ...project,
+        views: view?.views ?? 0,
+        date: view?.createdAt?.toISOString() || '',
+      },
     }
   })

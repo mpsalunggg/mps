@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as CourtIndexRouteImport } from './routes/court/index'
 import { Route as GuestbookIndexRouteImport } from './routes/guestbook/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects/$slug'
@@ -39,6 +40,11 @@ const AboutIndexRoute = AboutIndexRouteImport.update({
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CourtIndexRoute = CourtIndexRouteImport.update({
+  id: '/court/',
+  path: '/court/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuestbookIndexRoute = GuestbookIndexRouteImport.update({
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/writing/$slug': typeof WritingSlugRoute
   '/about/': typeof AboutIndexRoute
   '/blog/': typeof BlogIndexRoute
+  '/court/': typeof CourtIndexRoute
   '/guestbook/': typeof GuestbookIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/work/': typeof WorkIndexRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/writing/$slug': typeof WritingSlugRoute
   '/about': typeof AboutIndexRoute
   '/blog': typeof BlogIndexRoute
+  '/court': typeof CourtIndexRoute
   '/guestbook': typeof GuestbookIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/work': typeof WorkIndexRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/writing/$slug': typeof WritingSlugRoute
   '/about/': typeof AboutIndexRoute
   '/blog/': typeof BlogIndexRoute
+  '/court/': typeof CourtIndexRoute
   '/guestbook/': typeof GuestbookIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/work/': typeof WorkIndexRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/writing/$slug'
     | '/about/'
     | '/blog/'
+    | '/court/'
     | '/guestbook/'
     | '/projects/'
     | '/work/'
@@ -188,6 +198,7 @@ export interface FileRouteTypes {
     | '/writing/$slug'
     | '/about'
     | '/blog'
+    | '/court'
     | '/guestbook'
     | '/projects'
     | '/work'
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
     | '/writing/$slug'
     | '/about/'
     | '/blog/'
+    | '/court/'
     | '/guestbook/'
     | '/projects/'
     | '/work/'
@@ -225,6 +237,7 @@ export interface RootRouteChildren {
   WritingSlugRoute: typeof WritingSlugRoute
   AboutIndexRoute: typeof AboutIndexRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  CourtIndexRoute: typeof CourtIndexRoute
   GuestbookIndexRoute: typeof GuestbookIndexRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
   WorkIndexRoute: typeof WorkIndexRoute
@@ -259,6 +272,13 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/court/': {
+      id: '/court/'
+      path: '/court'
+      fullPath: '/court/'
+      preLoaderRoute: typeof CourtIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guestbook/': {
@@ -361,6 +381,7 @@ const rootRouteChildren: RootRouteChildren = {
   WritingSlugRoute: WritingSlugRoute,
   AboutIndexRoute: AboutIndexRoute,
   BlogIndexRoute: BlogIndexRoute,
+  CourtIndexRoute: CourtIndexRoute,
   GuestbookIndexRoute: GuestbookIndexRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
   WorkIndexRoute: WorkIndexRoute,

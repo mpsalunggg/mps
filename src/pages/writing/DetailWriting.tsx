@@ -9,6 +9,7 @@ import TableOfContents, {
 } from "@/components/common/TableOfContents";
 import { WritingFrontmatter } from "@/lib/mdx";
 import Comments from "@/components/common/Comments";
+import { useViews } from "@/lib/views";
 
 interface DetailWritingProps {
   frontmatter: WritingFrontmatter;
@@ -17,6 +18,7 @@ interface DetailWritingProps {
 
 const DetailWriting = ({ frontmatter, slug }: DetailWritingProps) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
+  const views = useViews("writing", slug, frontmatter.views);
 
   const MDXComponent = useMemo(
     () =>
@@ -108,7 +110,7 @@ const DetailWriting = ({ frontmatter, slug }: DetailWritingProps) => {
 
               <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
                 <Eye className="h-3.5 w-3.5" />
-                <span>{frontmatter.views ?? 0} views</span>
+                <span>{views} views</span>
               </div>
             </header>
 

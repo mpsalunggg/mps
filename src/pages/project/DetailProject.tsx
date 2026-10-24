@@ -6,6 +6,7 @@ import { mdxComponents } from '@/components/common/MDXComponents'
 import { ProjectFrontmatter } from '@/lib/mdx'
 import { AnimatedLines } from '@/components/common/Background'
 import { Link } from '@tanstack/react-router'
+import { useViews } from '@/lib/views'
 
 interface DetailProjectProps {
   frontmatter: ProjectFrontmatter
@@ -13,6 +14,8 @@ interface DetailProjectProps {
 }
 
 const DetailProject = ({ frontmatter, slug }: DetailProjectProps) => {
+  const views = useViews('project', slug, frontmatter.views)
+
   const MDXComponent = lazy(() =>
     import(`../../content/projects/${slug}.mdx`).then((module) => ({
       default: module.default,
@@ -34,7 +37,7 @@ const DetailProject = ({ frontmatter, slug }: DetailProjectProps) => {
             <div>
               <Eye className="inline-block h-4 w-4 mr-1" />
               <span className="text-sm text-muted-foreground">
-                {frontmatter.views ?? 0} views
+                {views} views
               </span>
             </div>
           </div>

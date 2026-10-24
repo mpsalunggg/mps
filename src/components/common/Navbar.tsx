@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { ArrowUpRight } from 'lucide-react'
 import { ModeToggle } from './ModeToggle'
 
@@ -14,6 +14,9 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    const pathname = useRouterState({ select: (state) => state.location.pathname })
+    if (pathname.startsWith('/court')) return null
 
     return (
         <header
