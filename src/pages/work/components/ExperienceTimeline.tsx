@@ -191,7 +191,7 @@ export const ExperienceTimeline = ({
                                     current ? 'bg-primary' : 'border border-border'
                                 )}
                             />
-                            <TimelineSeparator className="border-border" />
+                            <TimelineSeparator />
                         </TimelineItem>
                     )
                 })}

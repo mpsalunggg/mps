@@ -130,7 +130,7 @@ const AboutPage = ({ contributions }: AboutPageProps) => {
                           <img src={achievement.image} className="h-8" />
                         </TimelineHeader>
                         <TimelineIndicator className="border border-border" />
-                        <TimelineSeparator className="border-1" />
+                        <TimelineSeparator />
                       </TimelineItem>
                     ))}
                   </Timeline>
